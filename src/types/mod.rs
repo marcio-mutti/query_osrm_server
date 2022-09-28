@@ -1,4 +1,4 @@
-use geo::coord;
+use geo::{coord, Geometry};
 use serde::Deserialize;
 use wkt::ToWkt;
 //use std::convert::TryFrom;
@@ -136,5 +136,10 @@ pub struct RoutedResponse {
 impl<'a> RoutedResponse {
     pub fn routes(&'a self) -> &'a [Route] {
         &self.routes
+    }
+}
+impl RoutedResponse {
+    pub fn nth_geometry(&self, nth: usize) -> Option<Geometry<f64>> {
+        self.routes.get(nth).map(|r| r.geometry().geometry())
     }
 }
