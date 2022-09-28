@@ -8,7 +8,7 @@ pub async fn find_nearest(
     host: &str,
     port: u32,
     profile: &str,
-    point: &Point<f32>,
+    point: &Point<f64>,
     number: u8,
 ) -> Result<Vec<Waypoint>, Box<dyn std::error::Error>> {
     let query_string = format!(
@@ -28,8 +28,8 @@ pub async fn route(
     host: &str,
     port: u32,
     profile: &str,
-    origin: &Point<f32>,
-    destiny: &Point<f32>,
+    origin: &Point<f64>,
+    destiny: &Point<f64>,
 ) -> Result<RoutedResponse, Box<dyn std::error::Error>> {
     let query_string = format!(
         "http://{}:{}/route/v1/{}/{},{};{},{}?geometries=geojson&overview=full&annotations=false",

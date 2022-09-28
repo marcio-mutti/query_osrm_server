@@ -6,20 +6,20 @@ use wkt::ToWkt;
 #[derive(Deserialize)]
 pub struct Waypoint {
     name: String,
-    location: [f32; 2],
-    distance: f32,
+    location: [f64; 2],
+    distance: f64,
     hint: String,
     nodes: Option<[u64; 2]>,
 }
 impl Waypoint {
-    pub fn geometry(&self) -> geo::Point<f32> {
+    pub fn geometry(&self) -> geo::Point<f64> {
         geo::Point::new(self.location[0], self.location[1])
     }
 }
 #[derive(Deserialize)]
 pub struct Route {
-    distance: f32,
-    duration: f32,
+    distance: f64,
+    duration: f64,
     geometry: GeoJSONGeometry,
 }
 
@@ -33,10 +33,10 @@ pub struct GeoJSONGeometry {
     //At this  time, focus on linestring, eventually find out if other geometries needed
     #[serde(rename = "type")]
     geometry_type: String,
-    coordinates: Vec<[f32; 2]>,
+    coordinates: Vec<[f64; 2]>,
 }
 impl GeoJSONGeometry {
-    pub fn geometry(&self) -> geo::Geometry<f32> {
+    pub fn geometry(&self) -> geo::Geometry<f64> {
         //At this time, only linestrings.
         geo::LineString::new(
             self.coordinates
@@ -59,9 +59,9 @@ impl GeoJSONGeometry {
 
 #[derive(Deserialize)]
 pub struct RouteLeg {
-    distance: f32,
-    duration: f32,
-    weight: f32,
+    distance: f64,
+    duration: f64,
+    weight: f64,
     summary: String,
     steps: Vec<RouteStep>,
 }
@@ -74,7 +74,7 @@ pub struct Lane {
 
 #[derive(Deserialize)]
 pub struct Intersection {
-    location: [f32; 2],
+    location: [f64; 2],
     bearings: Vec<u16>,
     classes: Vec<String>,
     entry: Vec<bool>,
@@ -87,10 +87,10 @@ pub struct Intersection {
 
 #[derive(Deserialize)]
 pub struct RouteStep {
-    distance: f32,
-    duration: f32,
+    distance: f64,
+    duration: f64,
     geometry: String,
-    weight: f32,
+    weight: f64,
     name: String,
     #[serde(rename = "ref")]
     route_ref: i32,
@@ -107,7 +107,7 @@ pub struct RouteStep {
 
 #[derive(Deserialize)]
 pub struct StepManeuver {
-    location: [f32; 2],
+    location: [f64; 2],
     #[serde(rename = "type")]
     maneuver_type: String,
 }
