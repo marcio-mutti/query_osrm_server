@@ -11,7 +11,11 @@ pub struct Waypoint {
     hint: String,
     nodes: Option<[u64; 2]>,
 }
-
+impl Waypoint {
+    pub fn geometry(&self) -> geo::Point<f32> {
+        geo::Point::new(self.location[0], self.location[1])
+    }
+}
 #[derive(Deserialize)]
 pub struct Route {
     distance: f32,
