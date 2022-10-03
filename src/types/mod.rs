@@ -15,6 +15,9 @@ impl Waypoint {
     pub fn geometry(&self) -> geo::Point<f64> {
         geo::Point::new(self.location[0], self.location[1])
     }
+    pub fn distance(&self) -> &f64 {
+        &self.distance
+    }
 }
 #[derive(Deserialize)]
 pub struct Route {
