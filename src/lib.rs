@@ -2,7 +2,7 @@ use crate::types::Waypoint;
 use geo::Point;
 use types::{NearestResponse, RoutedResponse};
 
-mod types;
+pub mod types;
 
 pub async fn find_nearest(
     host: &str,
